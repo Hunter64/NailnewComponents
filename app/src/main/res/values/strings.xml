@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">NailnewComponents</string>
 
-    <string name="user_name">Victor Lukas</string>
-    <string name="user_email">victor_lukas@gmail.com</string>
+    <string name="user_name">Christian Giménez</string>
+    <string name="user_email">chaco19@gmail.com</string>
+    <string name="user_club">Pachuca FC</string>
 
     <string name="open_drawer">Navigation Drawer is open</string>
     <string name="close_drawer">Navigation Drawer is close</string>

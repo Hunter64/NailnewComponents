@@ -2,7 +2,7 @@ package com.hector.nailnewcomponents.activities
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -13,6 +13,7 @@ import com.hector.nailnewcomponents.R
 import com.hector.nailnewcomponents.fragments.ArrivalsFragment
 import com.hector.nailnewcomponents.fragments.DeparturesFragment
 import com.hector.nailnewcomponents.fragments.HomeFragment
+import com.hector.nailnewcomponents.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -23,7 +24,7 @@ class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedL
         toolbarToLoad(toolbar as Toolbar)
 
         setNavDrawer()
-
+        setUserHeaderInformation()
         fragmentTransaction(HomeFragment())
         navView.menu.getItem(0).isChecked = true
     }
@@ -62,8 +63,8 @@ class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedL
 
     private fun showMessagesNavItemSelectedById(id: Int) {
         when (id) {
-            R.id.nav_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-            R.id.nav_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+            R.id.nav_profile -> toast("Profile to: " + getString(R.string.user_name))
+            R.id.nav_settings -> toast("Settings")
         }
     }
 
@@ -77,7 +78,13 @@ class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedL
     }
 
     private fun setUserHeaderInformation(){
+        val name = navView.getHeaderView(0).findViewById<TextView>(R.id.textViewName)
+        val email = navView.getHeaderView(0).findViewById<TextView>(R.id.textViewEmail)
+        val club = navView.getHeaderView(0).findViewById<TextView>(R.id.textViewClub)
 
+        name?.let { name.text = getString(R.string.user_name) }
+        email?.let { email.text = getString(R.string.user_email) }
+        club?.let { club.text = getString(R.string.user_club) }
     }
 
     override fun onBackPressed() {
