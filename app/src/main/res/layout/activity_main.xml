@@ -29,7 +29,7 @@
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header"
-            app:menu=""
+            app:menu="@menu/menu_drawer"
     />
 
 
