@@ -2,8 +2,10 @@ package com.hector.nailnewcomponents.activities
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.hector.mylibrary.ToolbarActivity
@@ -42,22 +44,47 @@ class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedL
         navView.setNavigationItemSelectedListener(this)
     }
 
-    private fun fragmentTransaction(fragment: Fragment){
+    private fun fragmentTransaction(fragment: Fragment) {
         //When click on a option support Fragment Manager change this and pass information in container
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commit()
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        //Override this for when click on options, give menu item that has a id for some action, this is interface that help control for tokens of options
 
-        when(item.itemId){
+    private fun loadFragmentById(id: Int) {
+        when (id) {
             R.id.home -> fragmentTransaction(HomeFragment())
             R.id.nav_departures -> fragmentTransaction(DeparturesFragment())
             R.id.nav_arrivals -> fragmentTransaction(ArrivalsFragment())
         }
+    }
 
+    private fun showMessagesNavItemSelectedById(id: Int) {
+        when (id) {
+            R.id.nav_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+            R.id.nav_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        //Override this for when click on options, give menu item that has a id for some action, this is interface that help control for tokens of options
+
+        showMessagesNavItemSelectedById(item.itemId)
+        loadFragmentById(item.itemId)
+        drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun setUserHeaderInformation(){
+
+    }
+
+    override fun onBackPressed() {
+        //For close is pressed back button
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START) //if is open so close
+        else
+            super.onBackPressed() //Default behaviour
     }
 }
