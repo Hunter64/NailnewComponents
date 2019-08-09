@@ -6,16 +6,19 @@
         <item
                 android:id="@+id/home"
                 android:title="Home"
+                android:icon="@drawable/ic_home"
         />
 
         <item
                 android:id="@+id/nav_departures"
                 android:title="Departures"
+                android:icon="@drawable/ic_departures"
         />
 
         <item
                 android:id="@+id/nav_arrivals"
                 android:title="Arrivals"
+                android:icon="@drawable/ic_arrivals"
         />
 
     </group>
@@ -25,10 +28,14 @@
     >
         <menu>
             <item android:id="@+id/nav_profile"
-                  android:title="Profile"/>
+                  android:title="Profile"
+                  android:icon="@drawable/ic_pofile"
+            />
 
             <item android:id="@+id/nav_settings"
-                  android:title="Settings"/>
+                  android:title="Settings"
+                  android:icon="@drawable/ic_settings"
+            />
         </menu>
     </item>
 
