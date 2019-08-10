@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.hector.nailnewcomponents.R
+import com.hector.nailnewcomponents.adapters.FlightAdapter
 import com.hector.nailnewcomponents.models.Flight
 
 
@@ -20,6 +23,15 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class DeparturesFragment : Fragment() {
+
+    private val list: ArrayList<Flight> by lazy { getFlights() } //By lazy.. When this variable is call one time, his function inside brackets is run, but never is call, never run
+
+    private lateinit var recycler: RecyclerView
+
+    private lateinit var adapter: FlightAdapter
+
+    private val layoutManager by lazy { LinearLayoutManager(context) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
