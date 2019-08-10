@@ -25,8 +25,18 @@ class MainActivity : ToolbarActivity(), NavigationView.OnNavigationItemSelectedL
 
         setNavDrawer()
         setUserHeaderInformation()
-        fragmentTransaction(HomeFragment())
-        navView.menu.getItem(0).isChecked = true
+
+        //This condition is for horizontal and vertical orientation function
+        if(savedInstanceState == null){
+            fragmentTransaction(HomeFragment())
+            navView.menu.getItem(0).isChecked = true
+            toast("IS NULL!")
+        }
+        else{
+            toast("ISN'T NULL!")
+
+        }
+
     }
 
     private fun setNavDrawer() {
