@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.hector.nailnewcomponents.R
+import com.hector.nailnewcomponents.models.Flight
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,5 +29,16 @@ class DeparturesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_departures, container, false)
     }
 
+    private fun getFlights(): ArrayList<Flight>{
+        return object: ArrayList<Flight>(){
+            init {
+                add(Flight(1, "City One!", R.drawable.city_1))
+                add(Flight(1, "City Two!", R.drawable.city_2))
+                add(Flight(1, "City Three!", R.drawable.city_3))
+                add(Flight(1, "City Four!", R.drawable.city_4))
+                add(Flight(1, "City Five!", R.drawable.city_5))
+            }
+        }
+    }
 
 }
