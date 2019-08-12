@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.hector.nailnewcomponents.R
 import com.hector.nailnewcomponents.adapters.FlightAdapter
+import com.hector.nailnewcomponents.listeners.RecyclerFlightListener
 import com.hector.nailnewcomponents.models.Flight
+import com.hector.nailnewcomponents.toast
+import kotlinx.android.synthetic.main.fragment_departures.view.*
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +41,34 @@ class DeparturesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle(R.string.departures_fragment_title)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_departures, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_departures, container, false)
+
+        recycler = rootView.recyclerView as RecyclerView
+        setRecyclerView()
+
+        return rootView
+    }
+
+    private fun setRecyclerView() {
+        //Preparing recycler view
+        recycler.setHasFixedSize(true)
+        recycler.itemAnimator = DefaultItemAnimator()
+        recycler.layoutManager = layoutManager
+        adapter = (FlightAdapter(list, object: RecyclerFlightListener {
+            override fun onClick(flight: Flight, position: Int) {
+                activity?.toast("Let's go ${flight.city}!")
+            }
+
+            override fun onDelete(flight: Flight, position: Int) {
+                list.remove(flight)
+                adapter.notifyItemRemoved(position)
+                activity?.toast("${flight.city} has been removed!")
+            }
+
+        }))
+        recycler.adapter = adapter
     }
 
     private fun getFlights(): ArrayList<Flight>{
